@@ -1,0 +1,22 @@
+name: Run Python Script on Schedule
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # Jeden Tag um 06:00 UTC
+  workflow_dispatch:      # Optional: Manuell starten
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Script ausführen
+        run: python script.py
